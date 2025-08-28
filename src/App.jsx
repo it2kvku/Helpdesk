@@ -4,8 +4,13 @@ import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import ForgotPassword from './pages/ForgotPassword'
 import Dashboard from './pages/Dashboard'
-import CreateTicket from './pages/CreateTicket';
-import Tickets from './pages/Tickets';
+import CreateTicket from './pages/CreateTicket'
+import Tickets from './pages/Tickets'
+import Profile from './pages/Profile'
+import Support from './pages/Support'
+import KnowledgeBase from './pages/KnowledgeBase'
+import LiveChat from './pages/LiveChat'
+import Layout from './components/Layout'
 import './App.css'
 
 function App() {
@@ -14,7 +19,7 @@ function App() {
   // Protected route component
   const ProtectedRoute = ({ children }) => {
     if (loading) return <div className="loading-container">Loading...</div>;
-    return isAuthenticated ? children : <Navigate to="/login" />;
+    return isAuthenticated ? <Layout>{children}</Layout> : <Navigate to="/login" />;
   };
 
   return (
@@ -44,6 +49,30 @@ function App() {
           } 
         />
         <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="/support" 
+          element={
+            <ProtectedRoute>
+              <Support />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/knowledge-base" 
+          element={
+            <ProtectedRoute>
+              <KnowledgeBase />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
           path="/create-ticket" 
           element={
             <ProtectedRoute>
@@ -56,6 +85,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Tickets />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/live-chat" 
+          element={
+            <ProtectedRoute>
+              <LiveChat />
             </ProtectedRoute>
           }
         />
